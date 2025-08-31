@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+{% load time_filters %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Reporting Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'reporting/css/dashboard.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"> -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="navbar">
+            <div class="navbar-left">
+                <i class="fas fa-bars menu-icon"></i>
+                <div class="logo"><span>S</span>N</div>
+                <div class="title">Management Live</div>
+            </div>
+            <div class="navbar-right">
+                <a href="#"><i class="fas fa-home"></i> Home</a>
+                <a href="#"><i class="fas fa-user-graduate"></i> Admissions <i class="fas fa-chevron-down"></i></a>
+                <div class="profile">AB</div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <i class="fas fa-search"></i>
+            <i class="fas fa-filter"></i>
+            <i class="fas fa-calendar"></i>
+            <i class="fas fa-user-md"></i>
+            <i class="fas fa-notes-medical"></i>
+            <i class="fas fa-cogs"></i>
+            <i class="fas fa-home"></i>
+            <i class="fas fa-lock"></i>
+            <i class="fas fa-globe"></i>
+            <i class="fas fa-ambulance"></i>
+            <i class="fas fa-chart-bar"></i>
+        </div>
+
+        <!--Main Content -->
+        <div class="main-content">
+            <!-- Left Panel -->
+            <div class="left-panel">
+                <div class="left">
+                    <div class="card-header red">Key Metrics</div>
+                    <div class="metric-list">
+                        <div class="metric-item regTime">
+                            <p>Queue to Registration</p>
+                            <div class="subitem">
+                                <span>Registration Time</span>
+                                <span class="time red">
+                                    ⏱&nbsp;{{ jsonData.key_metrics.registration.time|seconds_to_hhmm}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="metric-item">
+                            <p>Registration to Triage</p>
+                            <div class="subitem">
+                                <span>Time to Triage</span>
+                                <span class="time green">
+                                    ⏱&nbsp;{{ jsonData.key_metrics.triage_done.time|seconds_to_hhmm}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="metric-item">
+                            <p>Triage to Consult</p>
+                            <div class="subitem">
+                                <span>Time to Consult</span>
+                                <span class="time green">
+                                    ⏱&nbsp;{{ jsonData.key_metrics.cons_done.time|seconds_to_hhmm}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="metric-item">
+                            <p>Triage End to Discharge</p>
+                            <div class="subitem">
+                                <span>In Zone Time</span>
+                                <span class="time red">
+                                    ⏱&nbsp;{{ jsonData.key_metrics.in_zone.time|seconds_to_hhmm }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="metric-item">
+                            <p>Consultation to Discharge</p>
+                            <div class="subitem">
+                                <span>Treatment Time</span>
+                                <span class="time red">
+                                    ⏱&nbsp;{{ jsonData.key_metrics.treatment.time|seconds_to_hhmm }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="metric-item">
+                            <p>Lab Order Request to Processing</p>
+                            <div class="subitem">
+                                <span>Lab Processing Time</span>
+                                <span class="time red">
+                                    ⏱&nbsp;{{ jsonData.key_metrics.lab_processing.time|seconds_to_hhmm}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="metric-item">
+                            <p>Radiology Order Request to Processing</p>
+                            <div class="subitem">
+                                <span>Radiology Processing Time</span>
+                                <span class="time red">
+                                    ⏱&nbsp;{{ jsonData.key_metrics.radiology_processing.time|seconds_to_hhmm}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="metric-item">
+                            <p>UCC Discharge to IP Bed Allotment</p>
+                            <div class="subitem">
+                                <span>IP Transfers</span>
+                                <span class="count"> <i class="fa-solid fa-user"></i>
+                                    {{ jsonData.key_metrics.ip_transfers.completed.count }}</span>
+                                <span class="time green">
+                                    ⏱&nbsp;{{jsonData.key_metrics.ip_transfers.inprogress.time|seconds_to_hhmm }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="visits-summary">
+                    <div class="summary-card">
+                        <h3>Total Visits</h3>
+                        <div class="big1">{{ jsonData.key_metrics.total.count }}</div>
+                    </div>
+                    <div class="summary-card red">
+                        <h3>Visit Time</h3>
+                        <p>Registration to discharge</p>
+                        <div class="big2">{{ jsonData.key_metrics.in_zone.time|seconds_to_hhmm }}</div>
+                    </div>
+                </div>
+                <div class="categories">
+                    <div class="cat-card red">
+                        <p>&nbsp;<i class="fa-solid fa-umbrella"></i>&nbsp;Insurance</p>
+                        <div class="cat-subcard">
+                            <span>{{ jsonData.completed.Payor.Insurance.count }}</span>
+                            <span>{{ jsonData.completed.Payor.Insurance.time|seconds_to_hhmm }}</span>
+                        </div>
+                    </div>
+                    <div class="cat-card purple">
+                        <p> &nbsp; <i class="fa-solid fa-book"></i> &nbsp; Self Pay</p>
+                        <div class="cat-subcard">
+                            <span>{{ jsonData.completed.Payor.Self_Pay.count }}</span>
+                            <span>{{ jsonData.completed.Payor.Self_Pay.time|seconds_to_hhmm }}</span>
+                        </div>
+                    </div>
+                    <div class="cat-card blue">
+                        <p> &nbsp;<i class="fa-solid fa-earth-americas"></i> &nbsp;International</p>
+                        <div class="cat-subcard">
+                            <span>{{ jsonData.completed.Residency.International.count }}</span>
+                            <span>{{ jsonData.completed.Residency.International.time|seconds_to_hhmm }}</span>
+                        </div>
+                    </div>
+                    <div class="cat-card green">
+                        <p>&nbsp;<i class="fa-solid fa-location-dot"></i>&nbsp;Local</p>
+                        <div class="cat-subcard">
+                            <span>{{ jsonData.completed.Residency.Local.count }}</span>
+                            <span>{{ jsonData.completed.Residency.Local.time|seconds_to_hhmm }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Panel -->
+            <div class="right-panel">
+                <div class="zone-stats card">
+                    <div class="zone-content">
+                        <table class="zone-table">
+                            <thead>
+                                <tr>
+                                    <th class="zone-header">Zone Statistics</th>
+                                    <th class="green-zone">Green Zone</th>
+                                    <th class="yellow-zone">Yellow Zone</th>
+                                    <th class="red-zone">Red Zone</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="zone-header1"><i class="fa-solid fa-users"></i><span>Total Visits</span>
+                                    </td>
+                                    <td class="green-zone1">{{ jsonData.zonestats.green.total_visits_count }}</td>
+                                    <td class="yellow-zone1">{{ jsonData.zonestats.yellow.total_visits_count }}</td>
+                                    <td class="red-zone1">{{ jsonData.zonestats.red.total_visits_count }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="zone-header1"><i class="fa-solid fa-sitemap"></i>
+                                        <span>Active</span>
+                                    </td>
+                                    <td class="green-zone1">{{ jsonData.zonestats.green.active_count }}</td>
+                                    <td class="yellow-zone1">{{ jsonData.zonestats.yellow.active_count }}</td>
+                                    <td class="red-zone1">{{ jsonData.zonestats.red.active_count }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="zone-header1"><i class="fa-solid fa-suitcase-rolling"></i>
+                                        <span>Discharged</span>
+                                    </td>
+                                    <td class="green-zone1">{{ jsonData.zonestats.green.discharge_count }}</td>
+                                    <td class="yellow-zone1">{{ jsonData.zonestats.yellow.discharge_count }}</td>
+                                    <td class="red-zone1">{{ jsonData.zonestats.red.discharge_count }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="zone-header1"><i class="fa-regular fa-clock"></i>
+                                        <span>Average Triage Time</span>
+                                    </td>
+                                    <td class="green-zone1">⏱
+                                        {{ jsonData.zonestats.green.avg_triage_tm|seconds_to_hhmm}}
+                                    </td>
+                                    <td class="yellow-zone1">⏱
+                                        {{jsonData.zonestats.yellow.avg_triage_tm|seconds_to_hhmm }}
+                                    </td>
+                                    <td class="red-zone1">⏱
+                                        {{ jsonData.zonestats.red.avg_triage_tm|seconds_to_hhmm }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="zone-header1"><i class="fa-solid fa-user-clock"></i>
+                                        <span>Average Hold Time</span>
+                                    </td>
+                                    <td class="green-zone1">⏱
+                                        {{ jsonData.zonestats.green.avg_visit_tm|seconds_to_hhmm}}</td>
+                                    <td class="yellow-zone1">⏱
+                                        {{ jsonData.zonestats.yellow.avg_visit_tm|seconds_to_hhmm}}
+                                    </td>
+                                    <td class="red-zone1">⏱
+                                        {{ jsonData.zonestats.red.avg_visit_tm|seconds_to_hhmm }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="triage">
+                            <p>Triage by <span>Interval</span></p>
+                            <div id="triage-interval-chart"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Charts Grid -->
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <p>Triage by <span>Zone</span></p>
+                        <div id="triage-zone-chart"></div>
+                    </div>
+                    <div class="chart-card">
+                        <p>Patients by <span>Interval</span></p>
+                        <div id="patients-interval-chart"></div>
+                    </div>
+                    <div class="chart-card">
+                        <p>Patients by <span>Doctor</span></p>
+                        <div id="patients-doctor-chart"></div>
+                    </div>
+                </div>
+                <!-- Bottom Grid -->
+                <div class="bottom-grid">
+                    <div class="waiting card">
+                        <div class="waiting-header">
+                            <p>Current</p>
+                            <h3>Waiting Status</h3>
+                            <div class="waiting-icon">
+                                <img src="{% static 'reporting/images/waiting-icon.png' %}" alt="Waiting Status">
+                            </div>
+                        </div>
+                        <div class="waiting-item">
+                            <div class="wait-item">
+                                <div class="wait-triage">
+                                    <span>
+                                        &nbsp;<i class="fa-solid fa-briefcase-medical"></i>
+                                        &nbsp;For</span> Triage
+                                </div>
+                                <div class="wait-count-time">
+                                    <div class=" wait-count wait-red"><i class="fa-solid fa-user"></i>
+                                        {{jsonData.inprogress.pdTriage.count }}</div>
+                                    <div class="wait-count red">
+                                        ⏱{{ jsonData.inprogress.pdTriage.time|seconds_to_hhmm }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wait-item">
+                                <div class="wait-consul"><span>
+                                        &nbsp;<i class="fas fa-user-md"></i> &nbsp; For
+                                    </span> Consultation
+                                </div>
+                                <div class="wait-count-time">
+                                    <div class=" wait-count wait-green"><i class="fa-solid fa-user"></i>
+                                        {{jsonData.inprogress.pdConsultation.count }}
+                                    </div>
+                                    <div class=" wait-count green">
+                                        ⏱{{ jsonData.inprogress.pdConsultation.time|seconds_to_hhmm}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="doctor-stats card">
+                        <div class="stats-header">
+                            <span>Doctor Statistics</span>
+                            <div id="doctor-search"></div>
+                        </div>
+                        <table id="doctor-table" class="table-striped" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Doctor</th>
+                                    <th>Patients</th>
+                                    <th>Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for doctor in jsonData.docstats %}
+                                <tr>
+                                    <td>{{ doctor.doc_name }}</td>
+                                    <td>{{ doctor.count }}</td>
+                                    <td class="green">{{ doctor.avg_visit_tm|seconds_to_hhmm }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ jsonData|json_script:"dashboard-data" }}
+    <script>
+        window.dashboardData = JSON.parse(document.getElementById('dashboard-data').textContent);
+
+        // Initialize DataTables
+        $('#doctor-table').DataTable({
+            paging: true,
+            searching: true,
+            ordering: false,
+            info: false,
+            pageLength: 5,
+            lengthChange: false,
+            language: {
+                search: "",
+                searchPlaceholder: "Search here...",
+                paginate: {
+                    previous: '<span class="rotate-left">く</span>',
+                    next: '<span class="rotate-right">く</span>'
+                }
+            },
+            dom: '<"top"f>rt<"bottom"p><"clear">'
+        });
+
+        $("#doctor-search").html($("#doctor-table_filter"));
+
+    </script>
+    <script src="{% static 'reporting/js/dashboard.js' %}"></script>
+</body>
+
+</html>

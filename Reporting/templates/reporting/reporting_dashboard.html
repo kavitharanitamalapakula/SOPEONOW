@@ -30,7 +30,11 @@
             </div>
             <div class="navbar-right">
                 <a href="#"><i class="fas fa-home"></i> Home</a>
-                <a href="#"><i class="fas fa-user-graduate"></i> Admissions <i class="fas fa-chevron-down"></i></a>
+                <a href="#">
+                    <i class="fas fa-user-graduate"></i>
+                    Admissions
+                    <i class="fas fa-chevron-down"></i>
+                </a>
                 <div class="profile">AB</div>
             </div>
         </div>
@@ -60,74 +64,117 @@
                         <div class="metric-item regTime">
                             <p>Queue to Registration</p>
                             <div class="subitem">
-                                <span>Registration Time</span>
-                                <span class="time red">
-                                    ⏱&nbsp;{{ jsonData.key_metrics.registration.time|seconds_to_hhmm}}
-                                </span>
+                                <span class="Registration">Registration Time</span>
+                                <div class="clock-img">
+                                    <div>
+                                        <img src="{% static 'reporting/images/clock.png' %}" alt="Waiting Status">
+                                    </div>
+                                    <span class="time-red">
+                                        {{ jsonData.key_metrics.registration.time|seconds_to_hhmm}}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <div class="metric-item">
                             <p>Registration to Triage</p>
                             <div class="subitem">
-                                <span>Time to Triage</span>
-                                <span class="time green">
-                                    ⏱&nbsp;{{ jsonData.key_metrics.triage_done.time|seconds_to_hhmm}}
-                                </span>
+                                <span class="Registration">Time to Triage</span>
+                                <div class="clock-img">
+                                    <div>
+                                        <img src="{% static 'reporting/images/clock.png' %}" alt="Waiting Status">
+                                    </div>
+                                    <span class="time-green">
+                                        {{ jsonData.key_metrics.triage_done.time|seconds_to_hhmm}}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <div class="metric-item">
                             <p>Triage to Consult</p>
                             <div class="subitem">
                                 <span>Time to Consult</span>
-                                <span class="time green">
-                                    ⏱&nbsp;{{ jsonData.key_metrics.cons_done.time|seconds_to_hhmm}}
-                                </span>
+                                <div class="clock-img">
+                                    <div>
+                                        <img src="{% static 'reporting/images/clock.png' %}" alt="Waiting Status">
+                                    </div>
+                                    <span class="time-green">
+                                        {{ jsonData.key_metrics.cons_done.time|seconds_to_hhmm}}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <div class="metric-item">
                             <p>Triage End to Discharge</p>
                             <div class="subitem">
                                 <span>In Zone Time</span>
-                                <span class="time red">
-                                    ⏱&nbsp;{{ jsonData.key_metrics.in_zone.time|seconds_to_hhmm }}
-                                </span>
+                                <div class="clock-img">
+                                    <div>
+                                        <img src="{% static 'reporting/images/clock.png' %}" alt="Waiting Status">
+                                    </div>
+                                    <span class="time-green">
+                                        {{ jsonData.key_metrics.in_zone.time|seconds_to_hhmm }}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <div class="metric-item">
                             <p>Consultation to Discharge</p>
                             <div class="subitem">
                                 <span>Treatment Time</span>
-                                <span class="time red">
-                                    ⏱&nbsp;{{ jsonData.key_metrics.treatment.time|seconds_to_hhmm }}
-                                </span>
+                                <div class="clock-img">
+                                    <div>
+                                        <img src="{% static 'reporting/images/clock.png' %}" alt="Waiting Status">
+                                    </div>
+                                    <span class="time-red">
+                                        {{ jsonData.key_metrics.treatment.time|seconds_to_hhmm }}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <div class="metric-item">
                             <p>Lab Order Request to Processing</p>
                             <div class="subitem">
                                 <span>Lab Processing Time</span>
-                                <span class="time red">
-                                    ⏱&nbsp;{{ jsonData.key_metrics.lab_processing.time|seconds_to_hhmm}}
-                                </span>
+                                <div class="clock-img">
+                                    <div>
+                                        <img src="{% static 'reporting/images/clock.png' %}" alt="Waiting Status">
+                                    </div>
+                                    <span class="time-red">
+                                        {{ jsonData.key_metrics.lab_processing.time|seconds_to_hhmm}}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <div class="metric-item">
                             <p>Radiology Order Request to Processing</p>
                             <div class="subitem">
                                 <span>Radiology Processing Time</span>
-                                <span class="time red">
-                                    ⏱&nbsp;{{ jsonData.key_metrics.radiology_processing.time|seconds_to_hhmm}}
-                                </span>
+                                <div class="clock-img">
+                                    <div>
+                                        <img src="{% static 'reporting/images/clock.png' %}" alt="Waiting Status">
+                                    </div>
+                                    <span class="time-red">
+                                        {{ jsonData.key_metrics.radiology_processing.time|seconds_to_hhmm}}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <div class="metric-item">
                             <p>UCC Discharge to IP Bed Allotment</p>
                             <div class="subitem">
                                 <span>IP Transfers</span>
-                                <span class="count"> <i class="fa-solid fa-user"></i>
-                                    {{ jsonData.key_metrics.ip_transfers.completed.count }}</span>
-                                <span class="time green">
-                                    ⏱&nbsp;{{jsonData.key_metrics.ip_transfers.inprogress.time|seconds_to_hhmm }}</span>
+                                <span class="count">
+                                    <i class="fa-solid fa-user"></i>
+                                    {{ jsonData.key_metrics.ip_transfers.completed.count }}
+                                </span>
+                                <div class="clock-img">
+                                    <div>
+                                        <img src="{% static 'reporting/images/clock.png' %}" alt="Waiting Status">
+                                    </div>
+                                    <span class="time-red">
+                                        {{jsonData.key_metrics.ip_transfers.inprogress.time|seconds_to_hhmm}}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -140,36 +187,66 @@
                     <div class="summary-card red">
                         <h3>Visit Time</h3>
                         <p>Registration to discharge</p>
-                        <div class="big2">{{ jsonData.key_metrics.in_zone.time|seconds_to_hhmm }}</div>
+                        <div class="big2">
+                            {{ jsonData.key_metrics.in_zone.time|seconds_to_hhmm }}
+                        </div>
                     </div>
                 </div>
                 <div class="categories">
                     <div class="cat-card red">
-                        <p>&nbsp;<i class="fa-solid fa-umbrella"></i>&nbsp;Insurance</p>
+                        <p class="marron">
+                            <img src="{% static 'reporting/images/insurance.png' %}" alt="Waiting Status">
+                            Insurance
+                        </p>
                         <div class="cat-subcard">
-                            <span>{{ jsonData.completed.Payor.Insurance.count }}</span>
-                            <span>{{ jsonData.completed.Payor.Insurance.time|seconds_to_hhmm }}</span>
+                            <span class="marron">
+                                {{ jsonData.completed.Payor.Insurance.count }}
+                            </span>
+                            <span class="time-green">
+                                {{ jsonData.completed.Payor.Insurance.time|seconds_to_hhmm}}
+                            </span>
                         </div>
                     </div>
                     <div class="cat-card purple">
-                        <p> &nbsp; <i class="fa-solid fa-book"></i> &nbsp; Self Pay</p>
+                        <p class="plum">
+                            <img src="{% static 'reporting/images/book.png' %}" alt="Waiting Status">
+                            Self Pay
+                        </p>
                         <div class="cat-subcard">
-                            <span>{{ jsonData.completed.Payor.Self_Pay.count }}</span>
-                            <span>{{ jsonData.completed.Payor.Self_Pay.time|seconds_to_hhmm }}</span>
+                            <span class="plum">
+                                {{ jsonData.completed.Payor.Self_Pay.count }}
+                            </span>
+                            <span class="time-red">
+                                {{ jsonData.completed.Payor.Self_Pay.time|seconds_to_hhmm }}
+                            </span>
                         </div>
                     </div>
                     <div class="cat-card blue">
-                        <p> &nbsp;<i class="fa-solid fa-earth-americas"></i> &nbsp;International</p>
+                        <p class="navy">
+                            <img src="{% static 'reporting/images/international.png' %}" alt="Waiting Status">
+                            International
+                        </p>
                         <div class="cat-subcard">
-                            <span>{{ jsonData.completed.Residency.International.count }}</span>
-                            <span>{{ jsonData.completed.Residency.International.time|seconds_to_hhmm }}</span>
+                            <span class="navy">
+                                {{ jsonData.completed.Residency.International.count }}
+                            </span>
+                            <span class="time-red">
+                                {{ jsonData.completed.Residency.International.time|seconds_to_hhmm }}
+                            </span>
                         </div>
                     </div>
                     <div class="cat-card green">
-                        <p>&nbsp;<i class="fa-solid fa-location-dot"></i>&nbsp;Local</p>
+                        <p class="local">
+                            <img src="{% static 'reporting/images/location.png' %}" alt="Waiting Status">
+                            Local
+                        </p>
                         <div class="cat-subcard">
-                            <span>{{ jsonData.completed.Residency.Local.count }}</span>
-                            <span>{{ jsonData.completed.Residency.Local.time|seconds_to_hhmm }}</span>
+                            <span class="local">
+                                {{ jsonData.completed.Residency.Local.count }}
+                            </span>
+                            <span class="time-green">
+                                {{ jsonData.completed.Residency.Local.time|seconds_to_hhmm }}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -189,14 +266,17 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="zone-header1"><i class="fa-solid fa-users"></i><span>Total Visits</span>
+                                    <td class="zone-header1">
+                                        <img src="{% static 'reporting/images/visits.png' %}" alt="Waiting Status">
+                                        <span>Total Visits</span>
                                     </td>
                                     <td class="green-zone1">{{ jsonData.zonestats.green.total_visits_count }}</td>
                                     <td class="yellow-zone1">{{ jsonData.zonestats.yellow.total_visits_count }}</td>
                                     <td class="red-zone1">{{ jsonData.zonestats.red.total_visits_count }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="zone-header1"><i class="fa-solid fa-sitemap"></i>
+                                    <td class="zone-header1">
+                                        <img src="{% static 'reporting/images/Active.png' %}" alt="Waiting Status">
                                         <span>Active</span>
                                     </td>
                                     <td class="green-zone1">{{ jsonData.zonestats.green.active_count }}</td>
@@ -204,7 +284,8 @@
                                     <td class="red-zone1">{{ jsonData.zonestats.red.active_count }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="zone-header1"><i class="fa-solid fa-suitcase-rolling"></i>
+                                    <td class="zone-header1">
+                                        <img src="{% static 'reporting/images/discharge.png' %}" alt="Waiting Status">
                                         <span>Discharged</span>
                                     </td>
                                     <td class="green-zone1">{{ jsonData.zonestats.green.discharge_count }}</td>
@@ -212,36 +293,69 @@
                                     <td class="red-zone1">{{ jsonData.zonestats.red.discharge_count }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="zone-header1"><i class="fa-regular fa-clock"></i>
+                                    <td class="zone-header1">
+                                        <img src="{% static 'reporting/images/triage.png' %}" alt="Waiting Status">
                                         <span>Average Triage Time</span>
                                     </td>
-                                    <td class="green-zone1">⏱
-                                        {{ jsonData.zonestats.green.avg_triage_tm|seconds_to_hhmm}}
+                                    <td class="green-zone1">
+                                        <span>
+                                            <img src="{% static 'reporting/images/clock.png' %}" alt="Waiting Status">
+                                        </span>
+                                        <span>
+                                            {{ jsonData.zonestats.green.avg_triage_tm|seconds_to_hhmm}}
+                                        </span>
                                     </td>
-                                    <td class="yellow-zone1">⏱
-                                        {{jsonData.zonestats.yellow.avg_triage_tm|seconds_to_hhmm }}
+                                    <td class="yellow-zone1">
+                                        <span>
+                                            <img src="{% static 'reporting/images/clock.png' %}" alt="Waiting Status">
+                                        </span>
+                                        <span>
+                                            {{jsonData.zonestats.yellow.avg_triage_tm|seconds_to_hhmm }}
+                                        </span>
                                     </td>
-                                    <td class="red-zone1">⏱
-                                        {{ jsonData.zonestats.red.avg_triage_tm|seconds_to_hhmm }}
+                                    <td class="red-zone1">
+                                        <span>
+                                            <img src="{% static 'reporting/images/clock.png' %}" alt="Waiting Status">
+                                        </span>
+                                        <span>
+                                            {{ jsonData.zonestats.red.avg_triage_tm|seconds_to_hhmm }}
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="zone-header1"><i class="fa-solid fa-user-clock"></i>
+                                    <td class="zone-header1">
+                                        <img src="{% static 'reporting/images/hold.png' %}" alt="Waiting Status">
                                         <span>Average Hold Time</span>
                                     </td>
-                                    <td class="green-zone1">⏱
-                                        {{ jsonData.zonestats.green.avg_visit_tm|seconds_to_hhmm}}</td>
-                                    <td class="yellow-zone1">⏱
-                                        {{ jsonData.zonestats.yellow.avg_visit_tm|seconds_to_hhmm}}
+                                    <td class="green-zone1">
+                                        <span>
+                                            <img src="{% static 'reporting/images/clock.png' %}" alt="Waiting Status">
+                                        </span>
+                                        <span>
+                                            {{ jsonData.zonestats.green.avg_visit_tm|seconds_to_hhmm}}
+                                        </span>
                                     </td>
-                                    <td class="red-zone1">⏱
-                                        {{ jsonData.zonestats.red.avg_visit_tm|seconds_to_hhmm }}
+                                    <td class="yellow-zone1">
+                                        <span>
+                                            <img src="{% static 'reporting/images/clock.png' %}" alt="Waiting Status">
+                                        </span>
+                                        <span>
+                                            {{ jsonData.zonestats.yellow.avg_visit_tm|seconds_to_hhmm}}
+                                        </span>
+                                    </td>
+                                    <td class="red-zone1">
+                                        <span>
+                                            <img src="{% static 'reporting/images/clock.png' %}" alt="Waiting Status">
+                                        </span>
+                                        <span>
+                                            {{ jsonData.zonestats.red.avg_visit_tm|seconds_to_hhmm }}
+                                        </span>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="triage">
-                            <p>Triage by <span>Interval</span></p>
+                            <p>Triage Time By <span>Interval</span></p>
                             <div id="triage-interval-chart"></div>
                         </div>
                     </div>
@@ -249,7 +363,7 @@
                 <!-- Charts Grid -->
                 <div class="charts-grid">
                     <div class="chart-card">
-                        <p>Triage by <span>Zone</span></p>
+                        <p>Patients by <span>Zone</span></p>
                         <div id="triage-zone-chart"></div>
                     </div>
                     <div class="chart-card">
@@ -257,7 +371,7 @@
                         <div id="patients-interval-chart"></div>
                     </div>
                     <div class="chart-card">
-                        <p>Patients by <span>Doctor</span></p>
+                        <p>Consultation by <span>Interval</span></p>
                         <div id="patients-doctor-chart"></div>
                     </div>
                 </div>
@@ -276,13 +390,17 @@
                                 <div class="wait-triage">
                                     <span>
                                         &nbsp;<i class="fa-solid fa-briefcase-medical"></i>
-                                        &nbsp;For</span> Triage
+                                        &nbsp;For
+                                    </span> Triage
                                 </div>
                                 <div class="wait-count-time">
-                                    <div class=" wait-count wait-red"><i class="fa-solid fa-user"></i>
-                                        {{jsonData.inprogress.pdTriage.count }}</div>
+                                    <div class=" wait-count wait-red">
+                                        <i class="fa-solid fa-user user-bold"></i>
+                                        {{jsonData.inprogress.pdTriage.count }}
+                                    </div>
                                     <div class="wait-count red">
-                                        ⏱{{ jsonData.inprogress.pdTriage.time|seconds_to_hhmm }}
+                                        <img src="{% static 'reporting/images/clock.png' %}" alt="Waiting Status">
+                                        {{ jsonData.inprogress.pdTriage.time|seconds_to_days}}
                                     </div>
                                 </div>
                             </div>
@@ -292,11 +410,12 @@
                                     </span> Consultation
                                 </div>
                                 <div class="wait-count-time">
-                                    <div class=" wait-count wait-green"><i class="fa-solid fa-user"></i>
+                                    <div class=" wait-count wait-green"><i class="fa-solid fa-user user-bold"></i>
                                         {{jsonData.inprogress.pdConsultation.count }}
                                     </div>
                                     <div class=" wait-count green">
-                                        ⏱{{ jsonData.inprogress.pdConsultation.time|seconds_to_hhmm}}
+                                        <img src="{% static 'reporting/images/clock.png' %}" alt="Waiting Status">
+                                        {{ jsonData.inprogress.pdConsultation.time|seconds_to_days}}
                                     </div>
                                 </div>
                             </div>
@@ -304,7 +423,8 @@
                     </div>
                     <div class="doctor-stats card">
                         <div class="stats-header">
-                            <span>Doctor Statistics</span>
+
+                            <span><i class="fa-solid fa-user user-bold"></i> &nbsp;Doctor Statistics</span>
                             <div id="doctor-search"></div>
                         </div>
                         <table id="doctor-table" class="table-striped" style="width:100%">

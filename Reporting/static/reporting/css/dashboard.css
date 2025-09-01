@@ -172,10 +172,16 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 5px;
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 .subitem>span {
     color: rgba(153, 153, 153, 1);
+}
+
+.Registration {
+    color: black !important;
 }
 
 .regTime {
@@ -183,8 +189,22 @@ body {
 }
 
 .metric-item p {
+    color: rgba(119, 119, 119, 1);
     padding: 5px;
     font-size: 8px;
+}
+
+.clock-img {
+    display: flex;
+    gap: 5px;
+}
+
+.time-red {
+    color: tomato !important;
+}
+
+.time-green {
+    color: green !important;
 }
 
 .count {
@@ -266,7 +286,7 @@ body {
 
 .cat-subcard {
     display: flex;
-    padding: 5px;
+    padding: 3px;
     justify-content: space-between;
 }
 
@@ -367,24 +387,47 @@ body {
 
 .zone-table th,
 .zone-table td {
-    padding: 5px;
+    padding: 3px;
     border: 1px solid #eee;
     font-size: small;
-    font-weight: 500;
-    border-radius: 7px;
+    border-radius: 5px;
 }
 
 .zone-header1 {
-    border: 2px solid red;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     background: rgba(235, 235, 255, 1);
     border-radius: 8px 8px 0 0;
 }
 
+.zone-header1 img {
+    width: 18px;
+    height: 18px;
+}
+
+.user-bold {
+    color: rgba(223, 212, 212, 0.945);
+}
+
 .green-zone1 {
     background: rgba(198, 240, 194, 0.5);
     border-radius: 8px 8px 0 0;
+}
+
+.green-zone1 span,
+.yellow-zone1 span,
+.red-zone1 span,
+.green-zone1 span {
+    vertical-align: middle;
+}
+
+.green-zone1 img,
+.yellow-zone1 img,
+.red-zone1 img,
+.green-zone1 img {
+    width: 15px;
+    height: 15px;
 }
 
 .yellow-zone1 {
@@ -651,6 +694,21 @@ body {
     border-bottom-right-radius: 5px;
 }
 
+.marron {
+    color: rgba(139, 67, 103, 1);
+}
+
+.plum {
+    color: rgba(84, 56, 100, 1);
+}
+
+.navy {
+    color: rgba(52, 53, 113, 1);
+}
+
+.local {
+    color: rgba(85, 85, 85, 1);
+}
 
 @media (max-width: 578px) {
     .container {

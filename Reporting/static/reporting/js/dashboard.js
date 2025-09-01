@@ -57,7 +57,7 @@
         chart: { type: "line", toolbar: { show: false } },
         colors: ["#8fe5afff", "#18a34dff"],
         series: [
-            { name: "Total Visits", type: "column", data: jsonData.graphs.AccidentEmergency.Zone["barpie-1"].bar.y[0].data },
+            { name: "Total Patients", type: "column", data: jsonData.graphs.AccidentEmergency.Zone["barpie-1"].bar.y[0].data },
             { name: "Avg Time", type: "line", data: jsonData.graphs.AccidentEmergency.Zone["barpie-1"].bar.y[1].data.map(msToTime) },
         ],
         xaxis: {
